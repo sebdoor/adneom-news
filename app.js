@@ -5,10 +5,33 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+
 var users = require('./routes/users');
 
 var app = express();
+
+var mongoose = require('mongoose');
+
+
+require('./models/Posts');
+require('./models/Comments');
+
+// Connexion avec mongoose via mongolab
+mongoose.connect('mongodb://sdoore:lanfeust07@ds013260.mlab.com:13260/adneom');
+// Connexion locale 
+// mongoose.connect('mongodb://localhost/news');
+
+//var db = mongoose.connection;
+//
+//db.on('error', function() {
+//   console.log('*****CONNECTION ERROR*****'); 
+//});
+//
+//db.on('open', function() {
+//   console.log('**** CONNECTION SUCCEED ****'); 
+//});
+
+var routes = require('./routes/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
